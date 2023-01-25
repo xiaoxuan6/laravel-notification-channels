@@ -1,0 +1,35 @@
+{
+    "name": "james.xue/laravel-notification-channels",
+    "description": "laravel notify channels",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["laravel", "notify", "notification", "laravel-notifications", "laravel-notification-channels"],
+    "autoload": {
+        "psr-4": {
+            "Vinhson\\LaravelNotifications\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "xiaoxuan6",
+            "email": "1527736751@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">8.0",
+        "laravel/framework": "9.*"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.4"
+    },
+    "scripts": {
+        "pint": "vendor/bin/pint"
+    },
+    "extra": {
+        "laravel": {
+            "providers":[
+                "Vinhson\\LaravelNotifications\\LaravelNotificationsServiceProvider"
+            ]
+        }
+    }
+}
