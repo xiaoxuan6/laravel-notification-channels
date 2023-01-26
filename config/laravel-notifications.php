@@ -10,6 +10,5 @@ return [
 
     'lark' => [
         'access_token' => env('LARAVEL_NOTIFICATIONS_LARK_ACCESS_TOKEN', ''),
-        'send_type' => 'text', // support: text、markdown
     ],
 ];

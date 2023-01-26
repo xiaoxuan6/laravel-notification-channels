@@ -16,25 +16,12 @@ class LarkChannel extends AbstractChannel
             'text', 'default' => [
                 'msg_type' => 'text',
                 'content' => [
-                    'content' => $message,
+                    'text' => $message,
                 ],
-            ],
-            'markdown' => [
-                'msg_type' => 'post',
-                'content' => [
-                    'post' => [
-                        'zh_cn' => [
-                            'title' => $title,
-                            'content' => $message,
-                        ],
-                    ],
-                ],
-            ],
+            ]
         };
 
-        $url = 'https://open.feishu.cn/open-apis/bot/v2/hook/'.$this->config->get('laravel-notifications.lark.access_token');
-        $response = Http::withoutVerifying()->post($url, $payload)->json();
-
-        $this->writer($response);
+        $url = 'https://open.feishu.cn/open-apis/bot/v2/hook/' . $this->config->get('laravel-notifications.lark.access_token');
+        Http::withoutVerifying()->withMiddleware($this->handle())->post($url, $payload)->json();
     }
 }
