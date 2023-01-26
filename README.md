@@ -2,13 +2,13 @@
 
 # Install
 
-```shell
+```php
 composer require james.xue/laravel-notification-channels
 ```
 
 # Publish Config
 
-```shell
+```php
 php artisan make:vendor publish --tag=laravel-notification-channels
 ```
 
@@ -16,19 +16,19 @@ php artisan make:vendor publish --tag=laravel-notification-channels
 
 ### Log enable
 
-```shell
+```php
 LARAVEL_NOTIFICATIONS_LOG_ENABLE=true
 ```
 
 ### Ding_talk access_token
 
-```shell
+```php
 LARAVEL_NOTIFICATIONS_DING_TALK_ACCESS_TOKEN=xxx
 ```
 
 ### Lark access_token
 
-```shell
+```php
 LARAVEL_NOTIFICATIONS_LARK_ACCESS_TOKEN=xxx
 ```
 

@@ -2,6 +2,7 @@
 
 namespace Vinhson\LaravelNotifications\Channels;
 
+use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Config\Repository;
 use Illuminate\Support\Facades\Log;
@@ -33,7 +34,10 @@ class AbstractChannel
 
                 if ($log_enable) {
                     $after = function (Request $request, $options, $response) {
-                        $response = $response->wait(true);
+                        if ($response instanceof FulfilledPromise) {
+                            $response = $response->wait(true);
+                        }
+
                         Log::info('notification send response：', json_decode($response->getBody()->getContents(), JSON_UNESCAPED_UNICODE) ?? []);
                     };
 
