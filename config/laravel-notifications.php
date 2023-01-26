@@ -11,4 +11,9 @@ return [
     'lark' => [
         'access_token' => env('LARAVEL_NOTIFICATIONS_LARK_ACCESS_TOKEN', ''),
     ],
+
+    'wechat' => [
+        'key' => env('LARAVEL_NOTIFICATIONS_WECHAT_KEY', ''),
+        'send_type' => 'text', // support: text、markdown
+    ],
 ];

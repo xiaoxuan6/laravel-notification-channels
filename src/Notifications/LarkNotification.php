@@ -2,16 +2,10 @@
 
 namespace Vinhson\LaravelNotifications\Notifications;
 
-use Illuminate\Notifications\Notification;
 use Vinhson\LaravelNotifications\Channels\LarkChannel;
 
-class LarkNotification extends Notification
+class LarkNotification extends AbstractNotification
 {
-    public function __construct(
-        protected string $message
-    ) {
-    }
-
     /**
      * @param $notifiable
      * @return string[]

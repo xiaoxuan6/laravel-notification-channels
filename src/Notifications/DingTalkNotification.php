@@ -3,10 +3,9 @@
 namespace Vinhson\LaravelNotifications\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Vinhson\LaravelNotifications\Channels\DingTalkChannel;
 
-class DingTalkNotification extends Notification
+class DingTalkNotification extends AbstractNotification
 {
     use Queueable;
 
@@ -14,6 +13,7 @@ class DingTalkNotification extends Notification
         protected string $title,
         protected string $message,
     ) {
+        parent::__construct($this->message);
     }
 
     /**
