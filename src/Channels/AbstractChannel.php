@@ -2,9 +2,8 @@
 
 namespace Vinhson\LaravelNotifications\Channels;
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Config\Repository;
-use Illuminate\Http\Client\Request;
-use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Log;
 
 class AbstractChannel
@@ -24,7 +23,7 @@ class AbstractChannel
 
                 if ($log_enable) {
                     $before = function (Request $request, $options) {
-                        Log::info('notification send require：', $request->data());
+                        Log::info('notification send require：', json_decode($request->getBody()->getContents(), JSON_UNESCAPED_UNICODE));
                     };
 
                     $before($request, $options);
@@ -33,8 +32,9 @@ class AbstractChannel
                 $response = $handler($request, $options);
 
                 if ($log_enable) {
-                    $after = function (Request $request, $options, Response $response) {
-                        Log::info('notification send response：', $response->json());
+                    $after = function (Request $request, $options, $response) {
+                        $response = $response->wait(true);
+                        Log::info('notification send response：', json_decode($response->getBody()->getContents(), JSON_UNESCAPED_UNICODE) ?? []);
                     };
 
                     $after($request, $options, $response);
