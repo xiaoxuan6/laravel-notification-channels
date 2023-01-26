@@ -10,7 +10,7 @@ class LaravelNotificationsServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/laravel-notifications.php', 'laravel-notifications');
         if ($this->app->runningInConsole()) {
-            $this->publishes([__DIR__.'/../config/laravel-notifications.php' => config('laravel-notifications.php')], 'laravel-notification-channels');
+            $this->publishes([__DIR__.'/../config/laravel-notifications.php' => config_path('laravel-notifications.php')], 'laravel-notification-channels');
         }
     }
 }
