@@ -38,7 +38,26 @@ LARAVEL_NOTIFICATIONS_LARK_ACCESS_TOKEN=xxx
 use Illuminate\Support\Facades\Notification;
 use Vinhson\LaravelNotifications\Notifications\DingTalkNotification;
 
-Notification::send(new DingTalkNotification($title, $message));
+Notification::send($this, new DingTalkNotification($title, $message));
 or 
-Notification::send(new DingTalkNotification(message: $message));
+Notification::send($this, new DingTalkNotification(message: $message));
+```
+
+```php
+class NotifyController extends Controller
+{
+    use Notifiable;
+
+    public function index()
+    {
+        $user = User::factory()->create();
+
+        $this->notify(new DingTalkNotification('通知', '【golang】姓名：' . $user->name . ' 邮箱:' . $user->email));
+
+        config()->set('laravel-notifications.ding_talk.send_type', 'markdown');
+        $this->notify(new DingTalkNotification('Markdown 通知', '【golang】姓名：' . $user->name . ' 邮箱:' . $user->email));
+
+        return 'ok';
+    }
+}
 ```

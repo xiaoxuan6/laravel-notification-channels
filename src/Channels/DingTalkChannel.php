@@ -9,7 +9,7 @@ class DingTalkChannel extends AbstractChannel
 {
     /**
      * @param $notifiable
-     * @param DingTalkNotification $notification
+     * @param  DingTalkNotification  $notification
      */
     public function send($notifiable, DingTalkNotification $notification)
     {
@@ -21,7 +21,7 @@ class DingTalkChannel extends AbstractChannel
                 'msgtype' => 'text',
                 'text' => [
                     'content' => $message,
-                ]
+                ],
             ],
             'markdown' => [
                 'msgtype' => 'markdown',
@@ -32,12 +32,11 @@ class DingTalkChannel extends AbstractChannel
             ],
         };
 
-        $url = 'https://oapi.dingtalk.com/robot/send?access_token=' . $this->config->get('laravel-notifications.ding_talk.access_token');
+        $url = 'https://oapi.dingtalk.com/robot/send?access_token='.$this->config->get('laravel-notifications.ding_talk.access_token');
 
         Http::withoutVerifying()
             ->withHeaders(['Content-Type' => 'application/json;charset=utf-8'])
             ->withMiddleware($this->handle())
             ->post($url, $payload);
-
     }
 }

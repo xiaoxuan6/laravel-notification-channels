@@ -2,7 +2,8 @@
 
 namespace Vinhson\LaravelNotifications\Channels;
 
-use GuzzleHttp\Psr7\{Request, Response};
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Config\Repository;
 use Illuminate\Support\Facades\Log;
 use Psr\Http\Message\{RequestInterface};
@@ -11,8 +12,7 @@ class AbstractChannel
 {
     public function __construct(
         protected Repository $config
-    )
-    {
+    ) {
     }
 
     public function handle(): callable
@@ -21,11 +21,9 @@ class AbstractChannel
 
         return static function (callable $handler) use ($config): callable {
             return static function (RequestInterface $request, array $options) use ($handler, $config) {
-
                 $log_enable = $config->get('laravel-notifications.log_enable');
 
                 if ($log_enable) {
-
                     $before = function (Request $request, $options) {
                         $response = json_decode($request->getBody()->getContents(), JSON_UNESCAPED_UNICODE);
                         Log::info('notification send require：', $response);
@@ -37,9 +35,8 @@ class AbstractChannel
                 $response = $handler($request, $options);
 
                 if ($log_enable) {
-
                     $after = function (Request $request, $options, $response) {
-                        if (!$response instanceof Response) {
+                        if (! $response instanceof Response) {
                             $response = $response->wait(true);
                         }
                         $status = $response->getStatusCode();
