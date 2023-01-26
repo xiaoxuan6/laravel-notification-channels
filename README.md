@@ -9,7 +9,7 @@ composer require james.xue/laravel-notification-channels
 # Publish Config
 
 ```shell
-php artisan make:vendor publish --tag=laravel-notifications
+php artisan make:vendor publish --tag=laravel-notification-channels
 ```
 
 # Environment
