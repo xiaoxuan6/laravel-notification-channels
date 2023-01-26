@@ -1,4 +1,4 @@
-# laravel-notifications-channels
+# laravel-notification-channels
 
 # Install
 
