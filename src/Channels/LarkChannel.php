@@ -9,7 +9,6 @@ class LarkChannel extends AbstractChannel
 {
     public function send($notifiable, LarkNotification $notification)
     {
-        $title = $notification->getTitle();
         $message = $notification->toLark($notifiable);
 
         $payload = match ($this->config->get('laravel-notifications.lark.send_type', 'text')) {

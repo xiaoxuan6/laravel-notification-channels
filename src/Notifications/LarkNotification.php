@@ -8,7 +8,6 @@ use Vinhson\LaravelNotifications\Channels\LarkChannel;
 class LarkNotification extends Notification
 {
     public function __construct(
-        protected string $title,
         protected string $message
     ) {
     }
@@ -29,10 +28,5 @@ class LarkNotification extends Notification
     public function toLark($notifiable): string
     {
         return $this->message;
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
     }
 }
