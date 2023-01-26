@@ -2,11 +2,10 @@
 
 namespace Vinhson\LaravelNotifications\Channels;
 
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Config\Repository;
+use Illuminate\Http\Client\Request;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Log;
-use Psr\Http\Message\{RequestInterface};
 
 class AbstractChannel
 {
@@ -20,13 +19,12 @@ class AbstractChannel
         $config = $this->config;
 
         return static function (callable $handler) use ($config): callable {
-            return static function (RequestInterface $request, array $options) use ($handler, $config) {
+            return static function (Request $request, array $options) use ($handler, $config) {
                 $log_enable = $config->get('laravel-notifications.log_enable');
 
                 if ($log_enable) {
                     $before = function (Request $request, $options) {
-                        $response = json_decode($request->getBody()->getContents(), JSON_UNESCAPED_UNICODE);
-                        Log::info('notification send require：', $response);
+                        Log::info('notification send require：', $request->data());
                     };
 
                     $before($request, $options);
@@ -35,13 +33,8 @@ class AbstractChannel
                 $response = $handler($request, $options);
 
                 if ($log_enable) {
-                    $after = function (Request $request, $options, $response) {
-                        if (! $response instanceof Response) {
-                            $response = $response->wait(true);
-                        }
-                        $status = $response->getStatusCode();
-                        $response = $response->getBody()->getContents();
-                        Log::info('notification send response：', json_decode($response, JSON_UNESCAPED_UNICODE));
+                    $after = function (Request $request, $options, Response $response) {
+                        Log::info('notification send response：', $response->json());
                     };
 
                     $after($request, $options, $response);
