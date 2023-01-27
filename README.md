@@ -1,22 +1,22 @@
 # laravel-notification-channels
 
-# 1、Install
+# Install
 
 ```php
 composer require james.xue/laravel-notification-channels
 ```
 
-# 2、Publish Config
+# Publish Config
 
 ```php
 php artisan make:vendor publish --tag=laravel-notification-channels
 ```
 
-# 3、Environment
+# Environment
 
 Modify correspondence channel `env` configuration
 
-# 4、Usage
+# Usage
 
 ```php
 use Illuminate\Support\Facades\Notification;
@@ -47,7 +47,7 @@ class NotifyController extends Controller
 }
 ```
 
-# 5、Support
+# Support Channel
 
 |Channel|Notification|
 |:---|:---|
