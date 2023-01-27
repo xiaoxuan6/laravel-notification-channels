@@ -1,38 +1,22 @@
 # laravel-notification-channels
 
-# Install
+# 1、Install
 
 ```php
 composer require james.xue/laravel-notification-channels
 ```
 
-# Publish Config
+# 2、Publish Config
 
 ```php
 php artisan make:vendor publish --tag=laravel-notification-channels
 ```
 
-# Environment
+# 3、Environment
 
-### Log enable
+Modify correspondence channel `env` configuration
 
-```php
-LARAVEL_NOTIFICATIONS_LOG_ENABLE=true
-```
-
-### Ding_talk access_token
-
-```php
-LARAVEL_NOTIFICATIONS_DING_TALK_ACCESS_TOKEN=xxx
-```
-
-### Lark access_token
-
-```php
-LARAVEL_NOTIFICATIONS_LARK_ACCESS_TOKEN=xxx
-```
-
-# Usage
+# 4、Usage
 
 ```php
 use Illuminate\Support\Facades\Notification;
@@ -62,3 +46,14 @@ class NotifyController extends Controller
     }
 }
 ```
+
+# 5、Support
+
+|Channel|Notification|
+|:---|:---|
+|钉钉|DingTalkNotification::class|
+|企微|WechatNotification::class|
+|飞书|LarkNotification::class|
+|pushplus|PushPlusNotification::class|
+|Server 酱|ServerNotification::class|
+|一封传话|AMessageNotification::class|
