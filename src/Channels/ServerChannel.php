@@ -21,7 +21,6 @@ class ServerChannel extends AbstractChannel
         $url = sprintf('https://sctapi.ftqq.com/%s.send', $this->config->get('laravel-notifications.server.webhook'));
         Http::withoutVerifying()
             ->withMiddleware($this->handle())
-            ->asForm()
             ->post($url, $payload);
     }
 }
