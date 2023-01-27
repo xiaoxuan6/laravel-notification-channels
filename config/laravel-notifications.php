@@ -16,4 +16,8 @@ return [
         'key' => env('LARAVEL_NOTIFICATIONS_WECHAT_KEY', ''),
         'send_type' => 'text', // support: text、markdown
     ],
+
+    'server' => [
+        'webhook' => env('LARAVEL_NOTIFICATIONS_SERVER_WEBHOOK', ''),
+    ],
 ];

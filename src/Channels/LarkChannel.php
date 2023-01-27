@@ -11,14 +11,12 @@ class LarkChannel extends AbstractChannel
     {
         $message = $notification->toLark($notifiable);
 
-        $payload = match ($this->config->get('laravel-notifications.lark.send_type', 'text')) {
-            'text', 'default' => [
-                'msg_type' => 'text',
-                'content' => [
-                    'text' => $message,
-                ],
-            ]
-        };
+        $payload = [
+            'msg_type' => 'text',
+            'content' => [
+                'text' => $message,
+            ],
+        ];
 
         $url = 'https://open.feishu.cn/open-apis/bot/v2/hook/'.$this->config->get('laravel-notifications.lark.access_token');
         Http::withoutVerifying()
