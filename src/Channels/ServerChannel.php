@@ -9,12 +9,9 @@ class ServerChannel extends AbstractChannel
 {
     public function send($notifiable, ServerNotification $notification)
     {
-        $title = $notification->getTitle();
-        $message = $notification->toServer();
-
         $payload = [
-            'title' => $title,
-            'desp' => $message,
+            'title' => $notification->getTitle(),
+            'desp' => $notification->toServer(),
             'channel' => 9,
         ];
 

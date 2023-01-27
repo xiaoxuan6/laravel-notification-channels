@@ -25,13 +25,13 @@ class DingTalkNotification extends AbstractNotification
         return [DingTalkChannel::class];
     }
 
-    public function toDingTalk($notifiable): string
+    public function toDingTalk(): string
     {
         return $this->message;
     }
 
     public function getTitle(): string
     {
-        return $this->title;
+        return $this->title ?? '';
     }
 }

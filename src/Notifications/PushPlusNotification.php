@@ -2,9 +2,9 @@
 
 namespace Vinhson\LaravelNotifications\Notifications;
 
-use Vinhson\LaravelNotifications\Channels\ServerChannel;
+use Vinhson\LaravelNotifications\Channels\PushPlusChannel;
 
-class ServerNotification extends AbstractNotification
+class PushPlusNotification extends AbstractNotification
 {
     public function __construct(
         protected string $title,
@@ -15,16 +15,16 @@ class ServerNotification extends AbstractNotification
 
     public function via($notifiable): array
     {
-        return [ServerChannel::class];
+        return [PushPlusChannel::class];
     }
 
-    public function toServer(): string
+    public function toPushPlus(): string
     {
         return $this->message;
     }
 
     public function getTitle(): string
     {
-        return $this->title ?? '';
+        return $this->message ?? '';
     }
 }

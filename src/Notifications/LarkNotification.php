@@ -16,10 +16,9 @@ class LarkNotification extends AbstractNotification
     }
 
     /**
-     * @param $notifiable
      * @return string
      */
-    public function toLark($notifiable): string
+    public function toLark(): string
     {
         return $this->message;
     }

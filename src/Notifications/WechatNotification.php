@@ -11,7 +11,7 @@ class WechatNotification extends AbstractNotification
         return [WechatChannel::class];
     }
 
-    public function toWechat($notifiable): string
+    public function toWechat(): string
     {
         return $this->message;
     }

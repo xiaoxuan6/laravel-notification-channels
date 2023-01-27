@@ -9,7 +9,7 @@ class WechatChannel extends AbstractChannel
 {
     public function send($notifiable, WechatNotification $notification)
     {
-        $message = $notification->toWechat($notifiable);
+        $message = $notification->toWechat();
 
         $payload = match ($this->config->get('laravel-notifications.wechat.send_type')) {
             'text', 'default' => [

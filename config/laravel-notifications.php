@@ -20,4 +20,8 @@ return [
     'server' => [
         'webhook' => env('LARAVEL_NOTIFICATIONS_SERVER_WEBHOOK', ''),
     ],
+
+    'push_plus' => [
+        'token' => env('LARAVEL_NOTIFICATIONS_PUSH_PLUS_TOKEN', ''),
+    ],
 ];

@@ -13,8 +13,7 @@ class DingTalkChannel extends AbstractChannel
      */
     public function send($notifiable, DingTalkNotification $notification)
     {
-        $title = $notification->getTitle();
-        $message = $notification->toDingTalk($notifiable);
+        $message = $notification->toDingTalk();
 
         $payload = match ($this->config->get('laravel-notifications.ding_talk.send_type', 'text')) {
             'text', 'default' => [
@@ -26,7 +25,7 @@ class DingTalkChannel extends AbstractChannel
             'markdown' => [
                 'msgtype' => 'markdown',
                 'markdown' => [
-                    'title' => $title,
+                    'title' => $notification->getTitle(),
                     'text' => $message,
                 ],
             ],

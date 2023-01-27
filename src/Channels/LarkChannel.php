@@ -9,12 +9,10 @@ class LarkChannel extends AbstractChannel
 {
     public function send($notifiable, LarkNotification $notification)
     {
-        $message = $notification->toLark($notifiable);
-
         $payload = [
             'msg_type' => 'text',
             'content' => [
-                'text' => $message,
+                'text' => $notification->toLark(),
             ],
         ];
 
