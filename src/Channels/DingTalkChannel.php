@@ -33,9 +33,11 @@ class DingTalkChannel extends AbstractChannel
 
         $url = 'https://oapi.dingtalk.com/robot/send?access_token='.$this->config->get('laravel-notifications.ding_talk.access_token');
 
-        Http::withoutVerifying()
+        $response = Http::withoutVerifying()
             ->withHeaders(['Content-Type' => 'application/json;charset=utf-8'])
             ->withMiddleware($this->handle())
             ->post($url, $payload);
+
+        $this->sendCallableNotify($response);
     }
 }

@@ -16,7 +16,9 @@ class AMessageChannel extends AbstractChannel
 
         $token = $this->config->get('laravel-notifications.a_message.token');
 
-        Http::withoutVerifying()
+        $response = Http::withoutVerifying()
             ->get('https://www.phprm.com/services/push/trigger/'.$token.'?'.http_build_query($payload));
+
+        $this->sendCallableNotify($response);
     }
 }

@@ -17,8 +17,10 @@ class LarkChannel extends AbstractChannel
         ];
 
         $url = 'https://open.feishu.cn/open-apis/bot/v2/hook/'.$this->config->get('laravel-notifications.lark.access_token');
-        Http::withoutVerifying()
+        $response = Http::withoutVerifying()
             ->withMiddleware($this->handle())
             ->post($url, $payload);
+
+        $this->sendCallableNotify($response);
     }
 }

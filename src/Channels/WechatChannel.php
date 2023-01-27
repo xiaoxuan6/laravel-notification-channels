@@ -27,8 +27,10 @@ class WechatChannel extends AbstractChannel
         };
 
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key='.$this->config->get('laravel-notifications.wechat.key');
-        Http::withoutVerifying()
+        $response = Http::withoutVerifying()
             ->withMiddleware($this->handle())
             ->post($url, $payload);
+
+        $this->sendCallableNotify($response);
     }
 }

@@ -35,4 +35,7 @@ return [
     'a_message' => [
         'token' => env('LARAVEL_NOTIFICATIONS_A_MESSAGE_TOKEN', ''),
     ],
+
+    'notify' => function (Illuminate\Http\Client\Response $response) {
+    },
 ];

@@ -5,6 +5,7 @@ namespace Vinhson\LaravelNotifications\Channels;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Config\Repository;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Log;
 
 class AbstractChannel
@@ -14,6 +15,11 @@ class AbstractChannel
     ) {
     }
 
+    /**
+     * writer log
+     *
+     * @return callable
+     */
     public function handle(): callable
     {
         $config = $this->config;
@@ -47,5 +53,17 @@ class AbstractChannel
                 return $response;
             };
         };
+    }
+
+    /**
+     * @param  Response  $response
+     */
+    public function sendCallableNotify(Response $response)
+    {
+        $callable = $this->config->get('laravel-notifications.notify');
+
+        if (is_callable($callable)) {
+            $callable($response);
+        }
     }
 }

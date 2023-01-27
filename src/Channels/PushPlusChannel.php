@@ -15,9 +15,11 @@ class PushPlusChannel extends AbstractChannel
             'content' => $notification->toPushPlus(),
         ];
 
-        Http::withoutVerifying()
+        $response = Http::withoutVerifying()
             ->withMiddleware($this->handle())
             ->withHeaders(['Content-Type' => 'application/json'])
             ->post('https://www.pushplus.plus/send', $payload);
+
+        $this->sendCallableNotify($response);
     }
 }
