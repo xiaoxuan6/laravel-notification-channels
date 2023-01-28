@@ -60,7 +60,7 @@ class AbstractChannel
      */
     public function sendCallableNotify(Response $response)
     {
-        $callable = $this->config->get('laravel-notifications.notify');
+        $callable = $this->config->get('laravel-notifications.callable');
 
         if (is_callable($callable)) {
             $callable($response);

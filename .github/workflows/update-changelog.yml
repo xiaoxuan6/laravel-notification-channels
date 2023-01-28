@@ -26,3 +26,4 @@ jobs:
           branch: main
           commit_message: Update CHANGELOG
           file_pattern: CHANGELOG.md
+          commit_author: xiaoxuan6 <1527736751@qq.com>
