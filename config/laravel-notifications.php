@@ -36,6 +36,10 @@ return [
         'token' => env('LARAVEL_NOTIFICATIONS_A_MESSAGE_TOKEN', ''),
     ],
 
+    'xi_zhi' => [
+        'token' => env('LARAVEL_NOTIFICATIONS_XI_ZHI_TOKEN', ''),
+    ],
+
     'callable' => function (Illuminate\Http\Client\Response $response) {
     },
 ];

@@ -57,3 +57,4 @@ class NotifyController extends Controller
 |pushplus|PushPlusNotification::class|
 |Server 酱|ServerNotification::class|
 |一封传话|AMessageNotification::class|
+|息知|XiZhiNotification::class|
