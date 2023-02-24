@@ -2,13 +2,12 @@
 
 namespace Vinhson\LaravelNotifications\Notifications;
 
-use Illuminate\Bus\Queueable;
+use JetBrains\PhpStorm\Pure;
 use Vinhson\LaravelNotifications\Channels\DingTalkChannel;
 
 class DingTalkNotification extends AbstractNotification
 {
-    use Queueable;
-
+    #[Pure]
     public function __construct(
         protected string $title,
         protected string $message,

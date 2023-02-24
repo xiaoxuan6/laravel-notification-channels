@@ -21,7 +21,8 @@
         "guzzlehttp/guzzle": "^7.5"
     },
     "require-dev": {
-        "laravel/pint": "^1.4"
+        "laravel/pint": "^1.4",
+        "jetbrains/phpstorm-attributes": "^1.0"
     },
     "scripts": {
         "pint": "vendor/bin/pint"
