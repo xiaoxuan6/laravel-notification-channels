@@ -3,7 +3,13 @@
     "description": "laravel notify channels",
     "type": "library",
     "license": "MIT",
-    "keywords": ["laravel", "notify", "notification", "laravel-notifications", "laravel-notification-channels"],
+    "keywords": [
+        "laravel",
+        "notify",
+        "notification",
+        "laravel-notifications",
+        "laravel-notification-channels"
+    ],
     "autoload": {
         "psr-4": {
             "Vinhson\\LaravelNotifications\\": "src/"
@@ -16,20 +22,26 @@
         }
     ],
     "require": {
-        "php": ">8.0",
-        "laravel/framework": "9.* | 10.*",
+        "php": "^8.0",
         "guzzlehttp/guzzle": "^7.5"
     },
     "require-dev": {
-        "laravel/pint": "^1.4",
-        "jetbrains/phpstorm-attributes": "^1.0"
+        "jetbrains/phpstorm-attributes": "^1.0",
+        "rector/rector": "^0.17.0",
+        "friendsofphp/php-cs-fixer": "^3.19",
+        "laravel/framework": "^9.0 | ^10.0"
     },
     "scripts": {
-        "pint": "vendor/bin/pint"
+        "pint": "vendor/bin/php-cs-fixer fix",
+        "rector": "vendor/bin/rector process --no-diffs --clear-cache --ansi",
+        "fixx": [
+            "@rector",
+            "@pint"
+        ]
     },
     "extra": {
         "laravel": {
-            "providers":[
+            "providers": [
                 "Vinhson\\LaravelNotifications\\LaravelNotificationsServiceProvider"
             ]
         }

@@ -1,12 +1,19 @@
 <?php
-
+/**
+ * This file is part of james.xue/laravel-notification-channels.
+ *
+ * (c) xiaoxuan6 <15227736751@qq.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 namespace Vinhson\LaravelNotifications\Channels;
 
-use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Config\Repository;
-use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Client\Response;
+use GuzzleHttp\Promise\FulfilledPromise;
 
 class AbstractChannel
 {
@@ -24,41 +31,36 @@ class AbstractChannel
     {
         $config = $this->config;
 
-        return static function (callable $handler) use ($config): callable {
-            return static function (Request $request, array $options) use ($handler, $config) {
-                $log_enable = $config->get('laravel-notifications.log_enable');
+        return static fn (callable $handler): callable => static function (Request $request, array $options) use ($handler, $config) {
+            $log_enable = $config->get('laravel-notifications.log_enable');
 
-                if ($log_enable) {
-                    $before = function (Request $request, $options) {
-                        Log::info('notification send require：', json_decode($request->getBody()->getContents(), JSON_UNESCAPED_UNICODE));
-                    };
+            if ($log_enable) {
+                $before = function (Request $request, $options): void {
+                    Log::info('notification send require：', json_decode($request->getBody()->getContents(), JSON_UNESCAPED_UNICODE, 512, JSON_THROW_ON_ERROR));
+                };
 
-                    $before($request, $options);
-                }
+                $before($request, $options);
+            }
 
-                $response = $handler($request, $options);
+            $response = $handler($request, $options);
 
-                if ($log_enable) {
-                    $after = function (Request $request, $options, $response) {
-                        if ($response instanceof FulfilledPromise) {
-                            $response = $response->wait(true);
-                        }
+            if ($log_enable) {
+                $after = function (Request $request, $options, $response): void {
+                    if ($response instanceof FulfilledPromise) {
+                        $response = $response->wait(true);
+                    }
 
-                        Log::info('notification send response：', json_decode($response->getBody()->getContents(), JSON_UNESCAPED_UNICODE) ?? []);
-                    };
+                    Log::info('notification send response：', json_decode($response->getBody()->getContents(), JSON_UNESCAPED_UNICODE, 512, JSON_THROW_ON_ERROR) ?? []);
+                };
 
-                    $after($request, $options, $response);
-                }
+                $after($request, $options, $response);
+            }
 
-                return $response;
-            };
+            return $response;
         };
     }
 
-    /**
-     * @param  Response  $response
-     */
-    public function sendCallableNotify(Response $response)
+    public function sendCallableNotify(Response $response): void
     {
         $callable = $this->config->get('laravel-notifications.callable');
 
