@@ -34,7 +34,7 @@
     "scripts": {
         "pint": "vendor/bin/php-cs-fixer fix",
         "rector": "vendor/bin/rector process --no-diffs --clear-cache --ansi",
-        "fixx": [
+        "fix": [
             "@rector",
             "@pint"
         ]
